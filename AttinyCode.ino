@@ -14,13 +14,14 @@
 //assign pins. pins 1 and 5 are still free in this setup
 const int rx = 3; //3 on attiny
 const int tx = 4; //4 on attiny
-const int reedPinOne = 0; //0 on attiny
+const int reedPinOne = 0; //0 on attiny just splice a bunch of reed switches together to this one pin 
 const int photoPin = A1; //A1 on attiny
 const int ledPin = 1;
 
 //constant params
 const int numReadings = 5;
-const int wakeValue = 0;
+const int wakeValue = 150; //set this to sunset 
+const int vol = 30; // 0 - 30
 
 //non constant params
 int photoValue = 0;
@@ -54,8 +55,8 @@ void setup() {
   mySerial.begin(9600);
   while (mySerial.available() < 10)
     delay(50);
-  setVolume(20);
-  delay(500);
+  setVolume(vol);
+  delay(150);
 
   //Power down various bits of hardware to lower power usage
   set_sleep_mode(SLEEP_MODE_PWR_DOWN); //Power down everything, wake up from WDT
